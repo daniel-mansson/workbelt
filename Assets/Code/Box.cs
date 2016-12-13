@@ -51,12 +51,26 @@ public class Box : MonoBehaviour
 		}
 	}
 
+	public void SetCommit(CommitEntry commit)
+	{
+		m_nameText.text = commit.author;
+		m_descText.text = commit.message;
+		var revs = m_revisionRoot.GetComponentsInChildren<Text>();
+		foreach (var revText in revs)
+		{
+			revText.text = "#" + commit.revision;
+		}
+	}
+
 	void Start () {
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (Body.position.y < -50f)
+		{
+			Destroy(this.gameObject);
+		}
 	}
 }

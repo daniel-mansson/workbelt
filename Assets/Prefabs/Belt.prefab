@@ -107,8 +107,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_material: {fileID: 2100000, guid: c68d07fd11b77534992b395f78f1a87c, type: 2}
   m_effector: {fileID: 252000013809963456}
-  m_scrollAdjust: 0.825
-  m_extraForce: 100
+  m_scrollAdjust: 1
+  m_extraForce: 0
+  m_velScale: 0.2
+  m_velScaleYOff: 0.62
+  m_velScaleYScale: 0.1
 --- !u!252 &252000013809963456
 SurfaceEffector2D:
   m_ObjectHideFlags: 1
@@ -120,9 +123,9 @@ SurfaceEffector2D:
   m_ColliderMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Speed: 0.25
+  m_Speed: 0.15
   m_SpeedVariation: 0
-  m_ForceScale: 0.1
+  m_ForceScale: 0
   m_UseContactForce: 0
-  m_UseFriction: 1
+  m_UseFriction: 0
   m_UseBounce: 1

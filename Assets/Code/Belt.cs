@@ -8,6 +8,11 @@ public class Belt : MonoBehaviour
 
 	public float m_scrollAdjust = 1f;
 	public float m_extraForce = 1f;
+
+	public float m_velScale = 0.2f;
+	public float m_velScaleYOff = 0.62f;
+	public float m_velScaleYScale = 0.05f;
+
 	float m_scrollSpeed;
 
 	void Start ()
@@ -28,6 +33,11 @@ public class Belt : MonoBehaviour
 		if (dx > 0f)
 		{
 			collision.rigidbody.AddForce(Vector2.right * dx * m_extraForce);
+			collision.rigidbody.velocity += Vector2.right * dx * m_velScale * Mathf.Clamp01(1f - (collision.rigidbody.position.y - m_velScaleYOff) / m_velScaleYScale);
+		}
+		else
+		{
+			collision.rigidbody.velocity += Vector2.right * dx * m_velScale * Mathf.Clamp01(1f - (collision.rigidbody.position.y - m_velScaleYOff) / m_velScaleYScale);
 		}
 	}
 }

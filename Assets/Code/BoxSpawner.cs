@@ -19,20 +19,34 @@ public class BoxSpawner : MonoBehaviour
 	{
 		if (GUI.Button(new Rect(10, 10, 50, 50), "B"))
 		{
-			var box = (Box)Instantiate(
-				m_boxPrefab, 
-				transform.position + (Vector3)Random.insideUnitCircle * m_radius, 
-				Quaternion.Euler(0, 0, Random.Range(0f, 360f)));
+			var project = Random.Range(0, 2) == 0 ? Project.ABBA : Project.HS;
+			var commit = new CommitEntry()
+			{
+				author = "Daniel",
+				message = "Hej hallå balh balhba hl",
+				revision = 3422
+			};
 
-			box.Body.velocity =
-				Vector3.right * Random.Range(m_minSpeed.x, m_maxSpeed.x) +
-				Vector3.up * Random.Range(m_minSpeed.y, m_maxSpeed.y);
-
-			box.Body.angularVelocity =
-				Random.Range(m_minAngVel, m_maxAngVel);
-
-			box.SetProject(Random.Range(0, 2) == 0 ? Project.ABBA : Project.HS);
+			SpawnBox(project, commit);
 		}
+	}
+
+	public void SpawnBox(Project project, CommitEntry commit)
+	{
+		var box = (Box)Instantiate(
+			m_boxPrefab,
+			transform.position + (Vector3)Random.insideUnitCircle * m_radius,
+			Quaternion.Euler(0, 0, Random.Range(0f, 360f)));
+
+		box.Body.velocity =
+			Vector3.right * Random.Range(m_minSpeed.x, m_maxSpeed.x) +
+			Vector3.up * Random.Range(m_minSpeed.y, m_maxSpeed.y);
+
+		box.Body.angularVelocity =
+			Random.Range(m_minAngVel, m_maxAngVel);
+
+		box.SetProject(project);
+		box.SetCommit(commit);	
 	}
 
 	void Update ()
